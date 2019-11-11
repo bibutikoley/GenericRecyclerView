@@ -1,0 +1,2 @@
+include ':app', ':recycleradapter'
+rootProject.name='GenericRecyclerView'
