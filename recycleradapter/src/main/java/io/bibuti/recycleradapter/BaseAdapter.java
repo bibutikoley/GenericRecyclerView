@@ -74,7 +74,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
         return mList;
     }
 
-    public void updateData(List<T> nList) {
+    private void updateData(List<T> nList) {
 
     }
 
@@ -86,7 +86,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
     /******* Generic Interface for Click Events ****************************************************************/
 
     public interface BaseInterface {
-        void onItemClicked(Object object, View view, int position);
+        void onItemClicked(Object dataType, View view, int position);
     }
 
     /******* Generic ViewHolder *********************************************************************************/

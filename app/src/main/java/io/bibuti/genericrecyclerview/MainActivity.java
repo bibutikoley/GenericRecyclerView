@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.setCallback(new BaseAdapter.BaseInterface() {
             @Override
-            public void onItemClicked(Object object, View view, int position) {
+            public void onItemClicked(Object dataType, View view, int position) {
 
             }
         });
