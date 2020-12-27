@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="diffUtil"
+            type="androidx.recyclerview.widget.DiffUtil.ItemCallback" />
+
+        <variable
             name="data"
             type="java.util.List" />
 
@@ -27,6 +31,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:listData="@{data}"
             app:listener="@{callback}"
+            app:diffUtil="@{diffUtil}"
             tools:listitem="@layout/single_item" />
 
     </RelativeLayout>

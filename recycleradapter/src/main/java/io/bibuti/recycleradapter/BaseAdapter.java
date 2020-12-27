@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.AsyncListDiffer;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -16,6 +18,10 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
     private List<? extends T> mList;
     private int mLayoutId;
     private BaseInterface mBaseInterface;
+
+
+    private AsyncListDiffer differ;
+    private DiffUtil.ItemCallback diffUtil;
 
     /******* Constructor ****************************************************************************************/
 
@@ -48,7 +54,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        return differ.getCurrentList().size();
     }
 
 
@@ -60,12 +66,6 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
 
     /******* Other Methods to perform actions in Recycler view ************************************************/
 
-
-    public void setData(List<T> data) {
-        this.mList = data;
-        notifyDataSetChanged();
-    }
-
     public void setListener(BaseInterface baseInterface) {
         this.mBaseInterface = baseInterface;
     }
@@ -74,13 +74,16 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.ViewHolder>
         return mList;
     }
 
-    private void updateData(List<T> nList) {
-
+    public void setUpDiffer() {
+        differ = new AsyncListDiffer(this, diffUtil);
     }
 
-    public void removeSingleItemAtPosition(int position) {
-        mList.remove(position);
-        notifyItemRemoved(position);
+    public AsyncListDiffer getDiffer() {
+        return differ;
+    }
+
+    public void setUpDiffUtil(DiffUtil.ItemCallback diffUtil) {
+        this.diffUtil = diffUtil;
     }
 
     /******* Generic Interface for Click Events ****************************************************************/
